@@ -50,7 +50,7 @@ soPoles = s4/Tso; % 4th-order bessel poles, 5-times faster
 
 zoPoles = exp(T * soPoles);
 
-L = place(phi', C', zoPoles)';
+L = obg_reg(phi, gamma, C, K, zoPoles, T);
 
 disp('Observer DSM')
 dsm_regob(phi, gamma, C, K, L)

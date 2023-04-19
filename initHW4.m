@@ -17,13 +17,12 @@ C = [1, 0];
 D = 0;
 
 %%%% derived / calculated characteristics
-nOrder = size(A);
+nOrder = min(size(A));
 eigA = eig(A);
-[phi, gamma] = c2d(A, B, T);
 
 %% begin design
 %%% initial selected design params
-Ts = 0.3;
+Ts = 0.25; % init val 0.3
 
 %%%% addn dynamics
 phia = 1;
@@ -31,8 +30,10 @@ gammaa = 1;
 
 %%% calc design params
 TbetaMax = max(imag(eigA));
-T = min(Ts / 20 * (nOrder + 1), ...
+T = min(Ts / (20 * (nOrder + 1)), ...
     pi / (5 * TbetaMax));
+
+[phi, gamma] = c2d(A, B, T);
 
 % programmatic bessel selection goes here
 sPoles = s3 / Ts;
